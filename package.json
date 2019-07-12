@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cojdev/lowpoly.git"
+    "url": "git+https://github.com/DennisWeiss/lowpoly.git"
   },
   "keywords": [
     "lowpoly",
@@ -19,9 +19,9 @@
   "author": "Charles Ojukwu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cojdev/lowpoly/issues"
+    "url": "https://github.com/DennisWeiss/lowpoly/issues"
   },
-  "homepage": "https://github.com/cojdev/lowpoly#readme",
+  "homepage": "https://dennisweiss.github.io/lowpoly/",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -50,6 +50,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
-    "react-color": "^2.14.1"
+    "ignore-warnings": "^0.2.1",
+    "react-color": "^2.14.1",
+    "yarn": "^1.16.0"
   }
 }
