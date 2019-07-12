@@ -5,7 +5,7 @@ import * as colour from '../common/colour';
 
 // widgets
 import ColourInput from '../widgets/ColourInput';
-import { Label } from '../widgets/Fields';
+import {Checkbox, Label} from '../widgets/Fields';
 import RangeInput from '../widgets/RangeInput';
 import ColourPalette from '../widgets/ColourPalette';
 import ControlGroup from '../widgets/ControlGroup';
@@ -67,6 +67,7 @@ export default class ColourControls extends React.Component {
             s: null,
             l: null,
             settings: null,
+            shuffleColours: false
         }
     }
 
@@ -177,8 +178,12 @@ export default class ColourControls extends React.Component {
         this.props.setColours(palette);
     }
 
+    handleShuffleColoursChange(e) {
+        this.props.setShuffleColours(e.target.checked);
+    }
+
     render() {
-        const { settings } = this.state;
+        const { settings, shuffleColours } = this.state;
         const { active } = this.state;
 
         // console.log(settings);
@@ -224,6 +229,14 @@ export default class ColourControls extends React.Component {
 
             return (
                 <ControlGroup title="Colours">
+
+                    <Label>
+                        <Checkbox checked={this.props.settings.shuffleColours} onChange={this.handleShuffleColoursChange.bind(this)} />
+                        Shuffle colours
+                    </Label>
+                    <br/>
+                    <br/>
+
                     <SmallButton
                         onClick={this.handleRemoveColour.bind(this)}
                         disabled={settings.length > 1 ? false : true}>-</SmallButton>

@@ -110,6 +110,7 @@ export default class Controls extends React.Component {
         this.setImage = props.setImage.bind(this);
         this.setUseImage = props.setUseImage.bind(this);
         this.setGeometry = props.setGeometry.bind(this);
+        this.setShuffleColours = props.setShuffleColours.bind(this);
     }
 
     render() {
@@ -120,6 +121,7 @@ export default class Controls extends React.Component {
         const setImage = this.setImage;
         const setUseImage = this.setUseImage;
         const setGeometry = this.setGeometry;
+        const setShuffleColours = this.setShuffleColours;
 
         return (
             <Container className={this.props.className}>
@@ -146,7 +148,8 @@ export default class Controls extends React.Component {
                         setGeometry={setGeometry} />
                     <ColourControls
                         settings={settings.colour}
-                        setColours={setColours} />
+                        setColours={setColours}
+                        setShuffleColours={setShuffleColours}/>
                     <PaletteControls
                         setColours={setColours} />
                     <ControlGroup title="Export">

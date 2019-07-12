@@ -100,6 +100,7 @@ export default class App extends React.Component {
             setGeometry: this.setGeometry.bind(this),
             setImage: this.setImage.bind(this),
             setUseImage: this.setUseImage.bind(this),
+            setShuffleColours: this.setShuffleColours.bind(this)
         }
 
         this.toggleControls = this.toggleControls.bind(this);
@@ -169,6 +170,12 @@ export default class App extends React.Component {
         this.setState({ settings: settings });
     }
 
+    setShuffleColours(boolean) {
+        let settings = Object.assign({}, this.state.settings);
+        settings.shuffleColours = boolean;
+        this.setState({ settings: settings });
+    }
+
     /**
      * Updates the output dataURI in state
      * @param {string} value The data URL for the generated canvas 
@@ -178,9 +185,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const settings = this.state.settings;
-        const presets = this.state.presets;
-        const output = this.state.output;
+        const {settings, presets, output, shuffleColours} = this.state;
 
         return (
             <Container>

@@ -190,19 +190,25 @@ export default class Display extends React.Component {
 
             var red, blue, green, alpha;
     
-            const setColour = function (xpos, ypos) {
-                if (xpos < 0) {
-                    xpos = 0;
+            const setColour = function (xpos, ypos, shuffleColours) {
+                if (shuffleColours) {
+                    xpos = Math.random() * cvs.width;
+                    ypos = Math.random() * cvs.height;
+                } else {
+                    if (xpos < 0) {
+                        xpos = 0;
+                    }
+                    if (xpos > cvs.width - 1) {
+                        xpos = cvs.width - 1;
+                    }
+                    if (ypos < 0) {
+                        ypos = 0;
+                    }
+                    if (ypos > cvs.height - 1) {
+                        ypos = cvs.height - 1;
+                    }
                 }
-                if (xpos > cvs.width - 1) {
-                    xpos = cvs.width - 1;
-                }
-                if (ypos < 0) {
-                    ypos = 0;
-                }
-                if (ypos > cvs.height - 1) {
-                    ypos = cvs.height - 1;
-                }
+
                 // console.log(imgd);
                 red = imgd.getImageData(xpos, ypos, 1, 1).data[0];
                 green = imgd.getImageData(xpos, ypos, 1, 1).data[1];
@@ -225,7 +231,11 @@ export default class Display extends React.Component {
                 // even rows
                 if (obj == points[i] && obj.r % 2 == 0 && points[i + maxCols + 1] && obj.c < maxCols - 1) {
                     //setColour(obj.x,obj.y+2*cellSize/3);
-                    setColour(Math.round(obj.c / maxCols * gridWidth), Math.round(obj.r / maxRows * gridHeight + 2 * cellSize / 3));
+                    setColour(
+                        Math.round(obj.c / maxCols * gridWidth),
+                        Math.round(obj.r / maxRows * gridHeight + 2 * cellSize / 3),
+                        this.props.settings.shuffleColours
+                    );
                     filler();
                     //console.log(obj.c);
                     ctx.beginPath();
@@ -237,7 +247,11 @@ export default class Display extends React.Component {
                     //ctx.stroke();
     
                     //setColour(obj.x+cellSize/2,obj.y+cellSize/3);
-                    setColour(Math.round(obj.c / maxCols * gridWidth + cellSize / 2), Math.round(obj.r / maxRows * gridHeight + cellSize / 3));
+                    setColour(
+                        Math.round(obj.c / maxCols * gridWidth + cellSize / 2),
+                        Math.round(obj.r / maxRows * gridHeight + cellSize / 3),
+                        this.props.settings.shuffleColours
+                    );
                     filler();
                     //ctx.fillStyle = "green";
                     ctx.beginPath();
@@ -257,7 +271,11 @@ export default class Display extends React.Component {
                 ) {
     
                     //setColour(obj.x-cellSize/2,obj.y+cellSize/3);
-                    setColour(Math.round((obj.c - 1) / maxCols * gridWidth), Math.round(obj.r / maxRows * gridHeight + cellSize / 3));
+                    setColour(
+                        Math.round((obj.c - 1) / maxCols * gridWidth),
+                        Math.round(obj.r / maxRows * gridHeight + cellSize / 3),
+                        this.props.settings.shuffleColours
+                    );
                     //if (!setColour(Math.round((obj.c-1)/maxCols*gridWidth),200)) {console.log(obj)}
                     filler();
                     ctx.beginPath();
@@ -269,7 +287,11 @@ export default class Display extends React.Component {
                     //ctx.stroke();
     
                     //setColour(obj.x,obj.y+2*cellSize/3);
-                    setColour(Math.round((obj.c - 1) / maxCols * gridWidth + cellSize / 2), Math.round(obj.r / maxRows * gridHeight + 2 * cellSize / 3));
+                    setColour(
+                        Math.round((obj.c - 1) / maxCols * gridWidth + cellSize / 2),
+                        Math.round(obj.r / maxRows * gridHeight + 2 * cellSize / 3),
+                        this.props.settings.shuffleColours
+                    );
                     filler();
                     //ctx.fillStyle = "green";
                     ctx.beginPath();
