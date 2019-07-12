@@ -67,7 +67,7 @@ export default class ColourControls extends React.Component {
             s: null,
             l: null,
             settings: null,
-            shuffleColours: false
+            shuffleColours: 0
         }
     }
 
@@ -178,8 +178,12 @@ export default class ColourControls extends React.Component {
         this.props.setColours(palette);
     }
 
-    handleShuffleColoursChange(e) {
-        this.props.setShuffleColours(e.target.checked);
+    handleChangeShuffleColours(e) {
+        this.setState({shuffleColours: e.target.value})
+    }
+
+    handleChangeShuffleColoursMouseUp(e) {
+        this.props.setShuffleColours(this.state.shuffleColours);
     }
 
     render() {
@@ -231,9 +235,15 @@ export default class ColourControls extends React.Component {
                 <ControlGroup title="Colours">
 
                     <Label>
-                        <Checkbox checked={this.props.settings.shuffleColours} onChange={this.handleShuffleColoursChange.bind(this)} />
-                        Shuffle colours
+                        Colour shuffle intensity: {shuffleColours}
                     </Label>
+                    <RangeInput
+                        min="0"
+                        max="100"
+                        name="Shuffle Colours intensity"
+                        value={shuffleColours}
+                        onChange={this.handleChangeShuffleColours.bind(this)}
+                        onMouseUp={this.handleChangeShuffleColoursMouseUp.bind(this)} />
                     <br/>
                     <br/>
 

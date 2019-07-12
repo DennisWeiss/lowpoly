@@ -32,6 +32,10 @@ const HiddenCanvas = styled.canvas`
     display: none;
 `;
 
+const lerp = function (a, b, t) {
+    return t * (b - a) + a;
+}
+
 export default class Display extends React.Component {
     constructor() {
         super();
@@ -191,23 +195,22 @@ export default class Display extends React.Component {
             var red, blue, green, alpha;
     
             const setColour = function (xpos, ypos, shuffleColours) {
-                if (shuffleColours) {
-                    xpos = Math.random() * cvs.width;
-                    ypos = Math.random() * cvs.height;
-                } else {
-                    if (xpos < 0) {
-                        xpos = 0;
-                    }
-                    if (xpos > cvs.width - 1) {
-                        xpos = cvs.width - 1;
-                    }
-                    if (ypos < 0) {
-                        ypos = 0;
-                    }
-                    if (ypos > cvs.height - 1) {
-                        ypos = cvs.height - 1;
-                    }
+                if (xpos < 0) {
+                    xpos = 0;
                 }
+                if (xpos > cvs.width - 1) {
+                    xpos = cvs.width - 1;
+                }
+                if (ypos < 0) {
+                    ypos = 0;
+                }
+                if (ypos > cvs.height - 1) {
+                    ypos = cvs.height - 1;
+                }
+
+                // shuffling
+                xpos = Math.floor(lerp(xpos, Math.random() * cvs.width, shuffleColours != null ? shuffleColours / 100 : 0))
+                ypos = Math.floor(lerp(ypos, Math.random() * cvs.height, shuffleColours != null ? shuffleColours / 100 : 0))
 
                 // console.log(imgd);
                 red = imgd.getImageData(xpos, ypos, 1, 1).data[0];

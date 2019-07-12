@@ -88,7 +88,9 @@ export default class App extends React.Component {
                 useImage: false,
             },
             presets: data.presets,
-            settings: {},
+            settings: {
+                shuffleColours: 0
+            },
             output: '',
             controlsOpen: false,
         };
@@ -185,7 +187,7 @@ export default class App extends React.Component {
     }
 
     render() {
-        const {settings, presets, output, shuffleColours} = this.state;
+        const {settings, presets, output} = this.state;
 
         return (
             <Container>
